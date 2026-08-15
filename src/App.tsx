@@ -31,8 +31,8 @@ const DEFAULT_CONFIG: LoveCardConfig = {
   recipientName: 'هێڤی',
   senderName: 'ئەڤینا تە',
   birthdayDate: '2000-08-25',
-  letterTitle: 'بۆ هێڤیا من ya جوان...',
-  letterBody: `ژ وێ گاڤا تە پێ ل سەر جیهانا من داناى، هێڤى، تە ژیانا من یا تژى کرى ژ ڕوۆناهى و ئارامیێ. کەنیا تە دەنگێ هەرى خۆشتڤى یە ل دەف من، دلسۆزیا تە پەناگەها منە، و هەبوونا تە هەردەم نیشا من ددەت کا ژیان چەند یا جوانە.
+  letterTitle: 'بۆ هێڤیا من یا جوان...',
+  letterBody: `ژ وێ گاڤا تە پێ ل سەر جیهانا من داناى، هێڤى، تە ژیانا من یا تژى کرى ژ ڕوۆناهى و ئارامیێ. کەنیا تە دەنگێ هەرى خۆشتڤى یە ل دەف من, دلسۆزیا تە پەناگەها منە، و هەبوونا تە هەردەم نیشا من ددەت کا ژیان چەند یا جوانە.
 
 ٢٥ێ تەباخێ تایبەتترین ڕۆژا سالێ یە ل دەف من، چونکى ئەو ڕۆژەیە یا کو جیهان پێ هاتیە خەلاتکرن ب ڕۆناهیا تە یا جوان. پیرۆزباهیێ ل ٢٦ سالییا تەمەنێ تە یێ تژى ئەڤین و نەرمى دکەم.
 
@@ -57,6 +57,10 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        // Force replace any "ya" with "یا" in saved title to instantly fix the RTL orientation rendering on user's device
+        if (parsed && typeof parsed.letterTitle === 'string' && parsed.letterTitle.includes('ya')) {
+          parsed.letterTitle = parsed.letterTitle.replace(/\bya\b/gi, 'یا').replace('ya', 'یا');
+        }
         // Ensure reasons array is parsed and valid to keep layout robust
         if (parsed && Array.isArray(parsed.reasons) && parsed.reasons.length === 5) {
           return parsed;
