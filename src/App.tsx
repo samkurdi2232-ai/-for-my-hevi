@@ -29,16 +29,20 @@ import ReasonsList from './components/ReasonsList';
 /// Default initial romantic card configuration
 const DEFAULT_CONFIG: LoveCardConfig = {
   recipientName: 'هێڤی',
-  senderName: 'ئەڤینا تە',
+  senderName: 'هونەر',
   birthdayDate: '2000-08-25',
-  letterTitle: 'بۆ هێڤیا من یا جوان...',
-  letterBody: `ژ وێ گاڤا تە پێ ل سەر جیهانا من داناى، هێڤى، تە ژیانا من یا تژى کرى ژ ڕوۆناهى و ئارامیێ. کەنیا تە دەنگێ هەرى خۆشتڤى یە ل دەف من, دلسۆزیا تە پەناگەها منە، و هەبوونا تە هەردەم نیشا من ددەت کا ژیان چەند یا جوانە.
+  letterTitle: 'بهاترین کەسامن',
+  letterBody: `هێڤیا من
 
-٢٥ێ تەباخێ تایبەتترین ڕۆژا سالێ یە ل دەف من، چونکى ئەو ڕۆژەیە یا کو جیهان پێ هاتیە خەلاتکرن ب ڕۆناهیا تە یا جوان. پیرۆزباهیێ ل ٢٦ سالییا تەمەنێ تە یێ تژى ئەڤین و نەرمى دکەم.
+خۆشتڤیامن ئەڤڕوو نە بتنێ ڕۆژەکا ئاسایە بەلکوو ڕۆژا ژ دایک بونا
+وی مڕۆڤایەتیێ یە یا کوو چاڤێت تژی ڕوناهی کرین  هەمی تشت
+گۆهرین  تە تاریاتیا ژیانامن کریە باخچەکێ تژی گول و ڕوناهی
+ڤێ ڕۆژێ ل ئێکانا خۆو پیرۆز دکەم هیڤیدارم ژ خۆدایێ مەزن
+دخازم هەمی ڕۆژێن تە تژی بن ژ خۆشیێ و بەڕەکەتێ
+توو نە بتنێ خۆشتڤیا منی توو هەمی کەسا منی لڤێ جیهانێ دا
+ژدل سوپاس بوو هەبوونا تە ژیانامن دا و هەمی دەما دگەل منی
 
-هیڤیدارم ئەڤ سالە بۆ تە یا تژى بت ژ کەیف و خۆشى و دلسۆزى، هەروەکو چەوا تە ئەڤ هەمیە ئیناینە د ژیانا من دا. ئەس گەلەک یێ سوپاسدارم کو ئەس یێ ل ڕەخ تە دڕێژیا ڤێ جادەیا جوان یا ژیانێ دا دچم.
-
-ڕۆژبوونا تە پیرۆز بت، ئەڤینا من.`,
+خۆشتڤییێ تە  هونەر`,
   musicType: 'youtube',
   classicalTrack: 'https://ia802606.us.archive.org/24/items/DebussyClairDeLune/Debussy%20-%20Clair%20de%20Lune.mp3',
   reasons: [
@@ -57,14 +61,27 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Force replace any "ya" with "یا" in saved title to instantly fix the RTL orientation rendering on user's device
-        if (parsed && typeof parsed.letterTitle === 'string' && parsed.letterTitle.includes('ya')) {
-          parsed.letterTitle = parsed.letterTitle.replace(/\bya\b/gi, 'یا').replace('ya', 'یا');
-        }
+        // Force update to the new beautiful letter shown in user's request screenshot
+        parsed.letterTitle = 'بهاترین کەسامن';
+        parsed.letterBody = `هێڤیا من
+
+خۆشتڤیامن ئەڤڕوو نە بتنێ ڕۆژەکا ئاسایە بەلکوو ڕۆژا ژ دایک بونا
+وی مڕۆڤایەتیێ یە یا کوو چاڤێت تژی ڕوناهی کرین  هەمی تشت
+گۆهرین  تە تاریاتیا ژیانامن کریە باخچەکێ تژی گول و ڕوناهی
+ڤێ ڕۆژێ ل ئێکانا خۆو پیرۆز دکەم هیڤیدارم ژ خۆدایێ مەزن
+دخازم هەمی ڕۆژێن تە تژی بن ژ خۆشیێ و بەڕەکەتێ
+توو نە بتنێ خۆشتڤیا منی توو هەمی کەسا منی لڤێ جیهانێ دا
+ژدل سوپاس بوو هەبوونا تە ژیانامن دا و هەمی دەما دگەل منی
+
+خۆشتڤییێ تە  هونەر`;
+        parsed.senderName = 'هونەر';
+        
         // Ensure reasons array is parsed and valid to keep layout robust
         if (parsed && Array.isArray(parsed.reasons) && parsed.reasons.length === 5) {
+          localStorage.setItem('romantic_card_config', JSON.stringify(parsed));
           return parsed;
         }
+        localStorage.setItem('romantic_card_config', JSON.stringify(DEFAULT_CONFIG));
         return DEFAULT_CONFIG;
       } catch (e) {
         return DEFAULT_CONFIG;
