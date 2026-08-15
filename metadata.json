@@ -1,0 +1,6 @@
+{
+  "name": "Romantic Birthday Card",
+  "description": "An elegant, cream and gold electronic birthday card featuring romantic animations, countdown timer, and background melody.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

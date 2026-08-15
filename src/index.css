@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Amiri", "Noto Naskh Arabic", serif;
+  --font-sans: "Amiri", "Noto Naskh Arabic", sans-serif;
+  
+  --color-gold-50: #fdfaf2;
+  --color-gold-100: #f7edd3;
+  --color-gold-200: #eed7a0;
+  --color-gold-300: #e3bf6c;
+  --color-gold-400: #d4af37;
+  --color-gold-500: #b89327;
+  --color-gold-600: #99771e;
+  --color-gold-700: #7b5e18;
+  --color-gold-800: #5c4512;
+  
+  --color-cream-50: #fcfbf7;
+  --color-cream-100: #f8f4eb;
+  --color-cream-200: #f2e9d7;
+  --color-cream-300: #e6dac1;
+  --color-cream-400: #dac9a7;
+  --color-cream-500: #cdb68d;
+  --color-cream-900: #2a2318;
+  
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4), 0 0 20px rgba(212, 175, 55, 0.2);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 35px rgba(212, 175, 55, 0.4);
+  }
+}
+
+html, body, button, input, select, textarea {
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif !important;
+}
+
+.font-serif {
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif !important;
+}
+
+.font-sans {
+  font-family: 'Amiri', 'Noto Naskh Arabic', sans-serif !important;
+}
+
+/* 3D Perspective and Card Flip Utilities */
+.perspective {
+  perspective: 1200px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@keyframes slow-gold-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15), inset 0 0 12px rgba(212, 175, 55, 0.05), 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.2), 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+    border-color: rgba(212, 175, 55, 0.85);
+  }
+}
+
+.gold-glow-pulse {
+  animation: slow-gold-glow 7s ease-in-out infinite;
+  transition: border-color 0.5s ease;
+}
